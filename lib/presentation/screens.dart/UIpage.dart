@@ -8,8 +8,7 @@ import 'package:task_6/provider/Country_provider.dart';
 import 'package:task_6/provider/Language_provider.dart';
 import 'package:task_6/provider/State_provider.dart';
 import 'package:task_6/provider/cityV0_provider.dart';
-import 'package:task_6/presentation/results.dart';
-import 'package:task_6/provider/loading.dart';
+import 'package:task_6/presentation/screens.dart/results.dart';
 
 class UIpage extends StatefulWidget {
   const UIpage({super.key});

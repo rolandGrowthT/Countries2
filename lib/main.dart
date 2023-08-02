@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task_6/presentation/screens.dart/home_page_screen.dart';
 import 'package:task_6/provider/Language_provider.dart';
+import 'package:task_6/provider/Property_provider.dart';
 import 'package:task_6/provider/cityV0_provider.dart';
 import 'package:task_6/provider/loading.dart';
 import 'provider/Country_provider.dart';
 import 'provider/State_provider.dart';
-import 'package:task_6/presentation/UIpage.dart';
+import 'package:task_6/presentation/screens.dart/UIpage.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -15,7 +17,7 @@ void main() {
       ChangeNotifierProvider(create: (context) => CityVO_Provider()),
       ChangeNotifierProvider(create: (context) => Language_Provider()),
       ChangeNotifierProvider(create: (context) => loading()),
-
+      ChangeNotifierProvider(create: (context) => Property_provider()),
     ],
     child: MyApp(),
   ));
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: UIpage(),
+      home: HomeScreen(),
     );
   }
 }
