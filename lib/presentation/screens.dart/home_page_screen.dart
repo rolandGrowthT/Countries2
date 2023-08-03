@@ -4,6 +4,7 @@ import 'package:task_6/models/Property.dart';
 import 'package:task_6/presentation/shared%20widgets/propertycard.dart';
 import 'package:task_6/provider/Property_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:task_6/presentation/shared widgets/customdrawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,13 +21,18 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   Widget build(BuildContext context) {
     List<Property> properties =
         Provider.of<Property_provider>(context).Properties;
-    // Provider.of<Property_provider>(context).selectedproperty=properties[0];
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Color(0xFFF9F9F9),
+        drawer: CustomDrawer(),
+        
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(15),
@@ -36,67 +42,80 @@ class _HomeScreenState extends State<HomeScreen> {
         toolbarHeight: 150,
         title: Column(
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 40, 5, 0),
-                  child: SvgPicture.asset('assets/icons/Group 13892.svg'),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.circular(5), // Set the border radius here
-                  ),
-                  width: 330,
-                  height: 45,
-                  margin: EdgeInsets.fromLTRB(14, 56, 1, 2),
-                  child: Stack(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(18, 14, 10, 0),
-                        child: SvgPicture.asset(
-                          'assets/icons/Group 13893.svg',
-                        ),
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 55, 0, 0),
+                    child: IconButton(
+                      onPressed: () {
+                        _scaffoldKey.currentState?.openDrawer();
+                        print('IconButton pressed!');
+                      },
+                      icon: SvgPicture.asset(
+                        'assets/icons/Group 13892.svg',
+                        width: 18,
+                        height: 18,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(40, 0, 8, 0),
-                        child: DropdownButton<Property>(
-                          isExpanded: true,
-                          hint: Text(
-                            'Select a property',
-                            style: TextStyle(
-                                fontFamily: 'MontserratRegular', fontSize: 13),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    width: 322,
+                    height: 45,
+                    margin: EdgeInsets.fromLTRB(0, 56, 0, 2),
+                    child: Stack(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(18, 14, 10, 0),
+                          child: SvgPicture.asset(
+                            'assets/icons/Group 13893.svg',
                           ),
-                          value: Provider.of<Property_provider>(context)
-                              .selectedproperty,
-                          onChanged: (Property? newValue) {
-                            Provider.of<Property_provider>(context,
-                                    listen: false)
-                                .Updatevalue(newValue!);
-                          },
-                          items: properties.map<DropdownMenuItem<Property>>(
-                              (Property property) {
-                            return DropdownMenuItem<Property>(
-                              value: property,
-                              child: Text(
-                                property.propertyName,
-                                style: TextStyle(
-                                    fontFamily: 'MontserratRegular',
-                                    fontSize: 13),
-                              ),
-                            );
-                          }).toList(),
-                          icon: SvgPicture.asset(
-                              'assets/icons/Icon-16x-dropdown.svg'),
-                          iconSize: 24,
-                          underline: SizedBox(),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(40, 0, 8, 0),
+                          child: DropdownButton<Property>(
+                            isExpanded: true,
+                            hint: Text(
+                              'Select a property',
+                              style: TextStyle(
+                                  fontFamily: 'MontserratRegular',
+                                  fontSize: 13),
+                            ),
+                            value: Provider.of<Property_provider>(context)
+                                .selectedproperty,
+                            onChanged: (Property? newValue) {
+                              Provider.of<Property_provider>(context,
+                                      listen: false)
+                                  .Updatevalue(newValue!);
+                            },
+                            items: properties.map<DropdownMenuItem<Property>>(
+                                (Property property) {
+                              return DropdownMenuItem<Property>(
+                                value: property,
+                                child: Text(
+                                  property.propertyName,
+                                  style: TextStyle(
+                                      fontFamily: 'MontserratRegular',
+                                      fontSize: 13),
+                                ),
+                              );
+                            }).toList(),
+                            icon: SvgPicture.asset(
+                                'assets/icons/Icon-16x-dropdown.svg'),
+                            iconSize: 24,
+                            underline: SizedBox(),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -213,6 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      
       body: ListView(
         children: [
           Container(
@@ -234,8 +254,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 1,
             itemBuilder: (context, index) {
               return PropertyCard(
-                space:
-                    Provider.of<Property_provider>(context).selectedproperty!.availableSpaces[index],
+                space: Provider.of<Property_provider>(context)
+                    .selectedproperty!
+                    .availableSpaces[index],
               );
             },
           ),

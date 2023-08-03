@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_6/presentation/screens.dart/home_page_screen.dart';
+import 'package:task_6/presentation/screens.dart/loginpage.dart';
 import 'package:task_6/provider/Language_provider.dart';
 import 'package:task_6/provider/Property_provider.dart';
 import 'package:task_6/provider/cityV0_provider.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: LoginPage(),
     );
   }
 }
