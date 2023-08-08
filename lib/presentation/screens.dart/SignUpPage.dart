@@ -4,6 +4,7 @@ import 'package:task_6/presentation/screens.dart/home_page_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:task_6/presentation/screens.dart/loginpage.dart';
 import 'package:task_6/Services.dart/FirebaseServices.dart';
+import 'package:task_6/presentation/shared%20widgets/customsnackbar.dart';
 import 'package:task_6/provider/CurrentUser_provider.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -196,51 +197,18 @@ class SignUpPage extends StatelessWidget {
                   if (controller3.text.trim() == '' &&
                       controller4.text.trim() == '') {
                     Except = 1;
-                    throw Exception(ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Please provid a valid first name and last name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'MontserratMedium',
-                          ),
-                        ),
-                        backgroundColor: Colors.red,
-                        duration: Duration(seconds: 2),
-                      ),
-                    ));
+                    CustomSnackbar.show(context,
+                        'Please provide a valid first name and last name');
                   } else if (controller3.text.trim() == '' &&
                       controller4.text.trim() != '') {
                     Except = 1;
-                    throw Exception(ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Please provid a valid first name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'MontserratMedium',
-                          ),
-                        ),
-                        backgroundColor: Colors.red,
-                        duration: Duration(seconds: 2),
-                      ),
-                    ));
+                    CustomSnackbar.show(
+                        context, 'Please provide a valid first name ');
                   } else if (controller3.text.trim() != '' &&
                       controller4.text.trim() == '') {
                     Except = 1;
-                    throw Exception(ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Please provid a valid last name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'MontserratMedium',
-                          ),
-                        ),
-                        backgroundColor: Colors.red,
-                        duration: Duration(seconds: 2),
-                      ),
-                    ));
+                    CustomSnackbar.show(
+                        context, 'Please provide a valid last name');
                   } else {
                     Except = 0;
                   }
@@ -261,71 +229,25 @@ class SignUpPage extends StatelessWidget {
                                 listen: false)
                             .fetchCurrentuser(user.uid);
                       }
-                      
+
                       Navigator.popUntil(context, (route) => route.isFirst);
                     } catch (e) {
                       print('firebase error');
                       if (e is FirebaseAuthException &&
                           controller1.text.trim() != '' &&
                           controller2.text.trim() != '') {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              '${e.message}',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'MontserratMedium',
-                              ),
-                            ),
-                            backgroundColor: Colors.red,
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
+                        CustomSnackbar.show(context, '${e.message}');
                       } else {
                         if (controller1.text.trim() == '' &&
                             controller2.text.trim() == '')
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Please enter an email and password',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'MontserratMedium',
-                                ),
-                              ),
-                              backgroundColor: Colors.red,
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
+                          CustomSnackbar.show(
+                              context, 'Please enter an email and password');
                         else if (controller1.text.trim() != '' &&
                             controller2.text.trim() == '')
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Please enter a password',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'MontserratMedium',
-                                ),
-                              ),
-                              backgroundColor: Colors.red,
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
+                          CustomSnackbar.show(
+                              context, 'Please enter a password');
                         else
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Please enter an email',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'MontserratMedium',
-                                ),
-                              ),
-                              backgroundColor: Colors.red,
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
+                          CustomSnackbar.show(context, 'Please enter an email');
                       }
                     }
                   }

@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:task_6/presentation/screens.dart/SignUpPage.dart';
 import 'package:task_6/presentation/screens.dart/home_page_screen.dart';
+import 'package:task_6/presentation/shared%20widgets/customsnackbar.dart';
 import 'package:task_6/provider/CurrentUser_provider.dart';
 
 class LoginPage extends StatelessWidget {
@@ -144,64 +146,18 @@ class LoginPage extends StatelessWidget {
                     if (e is FirebaseAuthException &&
                         controller1.text.trim() != '' &&
                         controller2.text.trim() != '') {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            '${e.message}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'MontserratMedium',
-                            ),
-                          ),
-                          backgroundColor: Colors.red,
-                          duration: Duration(seconds: 2),
-                        ),
-                      );
+                      CustomSnackbar.show(context, '${e.message}');
                     } else {
                       if (controller1.text.trim() == '' &&
+                          controller2.text.trim() == '') {
+                        CustomSnackbar.show(
+                            context, 'Please enter an email and password');
+                      } else if (controller1.text.trim() != '' &&
                           controller2.text.trim() == '')
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Please enter an email and password',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'MontserratMedium',
-                              ),
-                            ),
-                            backgroundColor: Colors.red,
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
-                      else if (controller1.text.trim() != '' &&
-                          controller2.text.trim() == '')
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Please enter a password',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'MontserratMedium',
-                              ),
-                            ),
-                            backgroundColor: Colors.red,
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
+                        CustomSnackbar.show(context, 'Please enter a password');
                       else
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Please enter an email',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'MontserratMedium',
-                              ),
-                            ),
-                            backgroundColor: Colors.red,
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
+                        CustomSnackbar.show(context, 'Please enter an email');
+
                     }
                   }
                 },
@@ -236,7 +192,6 @@ class LoginPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      
                       Navigator.push(
                         context,
                         MaterialPageRoute(
