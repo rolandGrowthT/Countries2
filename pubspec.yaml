@@ -74,10 +74,13 @@ flutter:
       - assets/icons/Icon-16x-dropdown2.svg
       - assets/icons/Group 13893.svg
       - assets/icons/Group 13892.svg
+      - assets/icons/Group 13829.svg
+
       - assets/icons/Group 13884.svg
       - assets/icons/Icon-16x-Star.svg
       - assets/pics/Group 10961.png
       - assets/icons/Group 11801.svg
+      - assets/icons/Group 11783.svg
       - assets/pics/Mask Group.png
 
   #   - images/a_dot_ham.jpeg

@@ -7,12 +7,21 @@ import 'package:task_6/presentation/screens.dart/home_page_screen.dart';
 import 'package:task_6/presentation/shared%20widgets/customsnackbar.dart';
 import 'package:task_6/provider/CurrentUser_provider.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   final controller1 = TextEditingController();
+
   final controller2 = TextEditingController();
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  bool isobscured = true;
+  String imageused = 'assets/icons/Group 11783.svg';
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
@@ -84,28 +93,53 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: Stack(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
-                      child: Text(
-                        'Password',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontFamily: 'MontserratRegular',
+                    Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
+                          child: Text(
+                            'Password',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontFamily: 'MontserratRegular',
+                            ),
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15, 2, 0, 0),
+                          child: TextField(
+                            obscureText: isobscured,
+                            controller: controller2,
+                            style: TextStyle(
+                                fontSize: 14, fontFamily: 'MontserratMedium'),
+                            decoration: InputDecoration(
+                              hintText: '**********',
+                              hintStyle: TextStyle(color: Color(0xFFB2BBCA)),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 2, 0, 0),
-                      child: TextField(
-                        obscureText: true,
-                        controller: controller2,
-                        style: TextStyle(
-                            fontSize: 14, fontFamily: 'MontserratMedium'),
-                        decoration: InputDecoration(
-                          hintText: '**********',
-                          hintStyle: TextStyle(color: Color(0xFFB2BBCA)),
-                          border: InputBorder.none,
-                        ),
+                      padding: EdgeInsets.fromLTRB(300, 5, 0, 5),
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isobscured = !isobscured;
+                          });
+                        },
+                        icon: isobscured
+                            ? SvgPicture.asset(
+                                'assets/icons/Group 13829.svg',
+                                width: 18,
+                                height: 18,
+                              )
+                            : SvgPicture.asset(
+                                'assets/icons/Group 11783.svg',
+                                width: 18,
+                                height: 18,
+                              ),
                       ),
                     ),
                   ],
@@ -157,7 +191,6 @@ class LoginPage extends StatelessWidget {
                         CustomSnackbar.show(context, 'Please enter a password');
                       else
                         CustomSnackbar.show(context, 'Please enter an email');
-
                     }
                   }
                 },
