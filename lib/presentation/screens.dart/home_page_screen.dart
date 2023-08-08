@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task_6/models/CurrentUser.dart';
 import 'package:task_6/models/Property.dart';
 import 'package:task_6/presentation/shared%20widgets/propertycard.dart';
+import 'package:task_6/provider/CurrentUser_provider.dart';
 import 'package:task_6/provider/Property_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_6/presentation/shared widgets/customdrawer.dart';
@@ -13,11 +16,12 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    // TODO: implement initState
-    Provider.of<Property_provider>(context, listen: false).fetchproperties();
+    // Provider.of<Property_provider>(context, listen: false).fetchproperties();
+    print('page called');
     super.initState();
   }
 
@@ -26,11 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     List<Property> properties =
         Provider.of<Property_provider>(context).Properties;
+    CurrentUser Cuser = Provider.of<CurrentUser_provider>(context).Cuser;
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Color(0xFFF9F9F9),
-        drawer: CustomDrawer(),
-        
+      drawer: CustomDrawer(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         shape: RoundedRectangleBorder(
@@ -232,7 +236,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      
       body: ListView(
         children: [
           Container(

@@ -7,6 +7,7 @@ class Property_provider extends ChangeNotifier {
   List<Property> _Properties = [];
   List<Property> get Properties => _Properties;
   Property? selectedproperty;
+  bool drawerisopen = false;
   Future<void> setdot(Space space1,int i) async {
     space1.cindex=i;
     notifyListeners();
