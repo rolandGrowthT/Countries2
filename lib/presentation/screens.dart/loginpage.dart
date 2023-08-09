@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:task_6/navigations.dart/Navigation.dart';
 import 'package:task_6/presentation/screens.dart/SignUpPage.dart';
 import 'package:task_6/presentation/screens.dart/home_page_screen.dart';
 import 'package:task_6/presentation/shared%20widgets/CustomSnackbar_widget.dart';
@@ -208,12 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SignUpPage(),
-                              ),
-                            );
+                            Navigation.goto('/SignUpPage');
                           },
                           child: Text(
                             "SIGN UP",

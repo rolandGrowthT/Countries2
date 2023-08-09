@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_6/models/CurrentUser_model.dart';
+import 'package:task_6/navigations.dart/AppRoutes.dart';
+import 'package:task_6/navigations.dart/Navigation.dart';
 import 'package:task_6/presentation/screens.dart/LoadingScreen.dart';
 import 'package:task_6/presentation/screens.dart/home_page_screen.dart';
 import 'package:task_6/presentation/screens.dart/loginpage.dart';
@@ -39,8 +41,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-      ),
-      home: loadingscreen(),
+      ),      navigatorKey: Navigation.navigatorKey,
+      initialRoute: '/LoadingScreen',
+      onGenerateRoute: AppRoutes.generateRoute,
     );
   }
 }

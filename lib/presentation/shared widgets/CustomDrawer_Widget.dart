@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_6/models/CurrentUser_model.dart';
+import 'package:task_6/navigations.dart/Navigation.dart';
 import 'package:task_6/presentation/screens.dart/home_page_screen.dart';
 import 'package:task_6/presentation/screens.dart/loginpage.dart';
 import 'package:task_6/provider/CurrentUser_provider.dart';
@@ -55,12 +56,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ListTile(
             title: Text('Your profile'),
             onTap: () async {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginPage(),
-                ),
-              );
+              Navigation.goto('/LoginPage');
             },
           ),
           ListTile(
@@ -74,12 +70,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 } else {
                   Scaffold.of(context).openEndDrawer();
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginPage(),
-                    ),
-                  );
+                  Navigation.goto('/LoginPage');
                 }
               } catch (e) {
                 print('Error logging out');

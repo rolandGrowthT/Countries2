@@ -4,6 +4,7 @@ import 'package:task_6/models/CState_model.dart';
 import 'package:task_6/models/Country_model.dart';
 import 'package:task_6/models/Languages_model.dart';
 import 'package:task_6/models/cityV0_model.dart';
+import 'package:task_6/navigations.dart/Navigation.dart';
 import 'package:task_6/provider/Country_provider.dart';
 import 'package:task_6/provider/Language_provider.dart';
 import 'package:task_6/provider/State_provider.dart';
@@ -28,7 +29,8 @@ class _UIpageState extends State<UIpage> {
   bool isLoading = false;
 
   Widget build(BuildContext context) {
-    List<CountryModel> countries = Provider.of<CountryProvider>(context).Countries;
+    List<CountryModel> countries =
+        Provider.of<CountryProvider>(context).Countries;
     List<CStateModel> states = Provider.of<StateProvider>(context).CStates;
     List<CityVOModel> cities = Provider.of<CityVOProvider>(context).Cities;
     List<LanguageModel> languages =
@@ -38,10 +40,7 @@ class _UIpageState extends State<UIpage> {
         title: Text('Country'),
       ),
       body: Center(
-        
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
+        child: Stack(alignment: Alignment.center, children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -66,8 +65,8 @@ class _UIpageState extends State<UIpage> {
                     Provider.of<CountryProvider>(context, listen: false)
                         .Updatevalue(newValue);
                   },
-                  items: countries
-                      .map<DropdownMenuItem<CountryModel>>((CountryModel country) {
+                  items: countries.map<DropdownMenuItem<CountryModel>>(
+                      (CountryModel country) {
                     return DropdownMenuItem<CountryModel>(
                       value: country,
                       child: Text(
@@ -98,7 +97,8 @@ class _UIpageState extends State<UIpage> {
                     Provider.of<StateProvider>(context, listen: false)
                         .Updatevalue(newValue2);
                   },
-                  items: states.map<DropdownMenuItem<CStateModel>>((CStateModel cstate) {
+                  items: states
+                      .map<DropdownMenuItem<CStateModel>>((CStateModel cstate) {
                     return DropdownMenuItem<CStateModel>(
                       value: cstate,
                       child: Text(
@@ -124,7 +124,8 @@ class _UIpageState extends State<UIpage> {
                     Provider.of<CityVOProvider>(context, listen: false)
                         .Updatevalue(newValue3!);
                   },
-                  items: cities.map<DropdownMenuItem<CityVOModel>>((CityVOModel city) {
+                  items: cities
+                      .map<DropdownMenuItem<CityVOModel>>((CityVOModel city) {
                     return DropdownMenuItem<CityVOModel>(
                       value: city,
                       child: Text(
@@ -151,8 +152,8 @@ class _UIpageState extends State<UIpage> {
                     Provider.of<LanguageProvider>(context, listen: false)
                         .Updatevalue(newValue4!);
                   },
-                  items: languages
-                      .map<DropdownMenuItem<LanguageModel>>((LanguageModel language) {
+                  items: languages.map<DropdownMenuItem<LanguageModel>>(
+                      (LanguageModel language) {
                     return DropdownMenuItem<LanguageModel>(
                       value: language,
                       child: Text(
@@ -167,20 +168,14 @@ class _UIpageState extends State<UIpage> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Results(),
-                    ),
-                  );
+                  Navigation.goto('/Results');
                 },
                 child: Text('Submit'),
               ),
               SizedBox(height: 20),
             ],
           ),
-        // Container(child: CircularProgressIndicator()),
-        
+          // Container(child: CircularProgressIndicator()),
         ]),
       ),
     );
