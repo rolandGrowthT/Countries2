@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:task_6/models/CurrentUser.dart';
+import 'package:task_6/models/CurrentUser_model.dart';
 import 'package:task_6/presentation/screens.dart/LoadingScreen.dart';
 import 'package:task_6/presentation/screens.dart/home_page_screen.dart';
 import 'package:task_6/presentation/screens.dart/loginpage.dart';
@@ -19,12 +19,12 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (context) => Country_provider()),
-      ChangeNotifierProvider(create: (context) => State_provider()),
-      ChangeNotifierProvider(create: (context) => CityVO_Provider()),
-      ChangeNotifierProvider(create: (context) => Language_Provider()),
-      ChangeNotifierProvider(create: (context) => CurrentUser_provider()),
-      ChangeNotifierProvider(create: (context) => Property_provider()),
+      ChangeNotifierProvider(create: (context) => CountryProvider()),
+      ChangeNotifierProvider(create: (context) => StateProvider()),
+      ChangeNotifierProvider(create: (context) => CityVOProvider()),
+      ChangeNotifierProvider(create: (context) => LanguageProvider()),
+      ChangeNotifierProvider(create: (context) => CurrentUserProvider()),
+      ChangeNotifierProvider(create: (context) => PropertyProvider()),
     ],
     child: MyApp(),
   ));

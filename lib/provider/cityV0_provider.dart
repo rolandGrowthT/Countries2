@@ -1,21 +1,21 @@
-import 'package:task_6/models/CState.dart';
-import 'package:task_6/models/cityV0.dart';
+import 'package:task_6/models/CState_model.dart';
+import 'package:task_6/models/cityV0_model.dart';
 import 'package:flutter/material.dart';
-import 'package:task_6/Services.dart/CompleteProfileService.dart';
+import 'package:task_6/Services.dart/CompleteProfile_Services.dart';
 
-class CityVO_Provider extends ChangeNotifier {
-  List<CityVO> _Cities = [];
-  List<CityVO> get Cities => _Cities;
-  CityVO? selectedCity;
+class CityVOProvider extends ChangeNotifier {
+  List<CityVOModel> _Cities = [];
+  List<CityVOModel> get Cities => _Cities;
+  CityVOModel? selectedCity;
 
-  CompleteProfileService service = CompleteProfileService();
+  CompleteProfileServices service = CompleteProfileServices();
 
-  Future<void> fetchCities(CState cState) async {
+  Future<void> fetchCities(CStateModel cState) async {
     _Cities = await service.getAllCitiesByStateId(cState);
     notifyListeners();
   }
 
-  Future<void> Updatevalue(CityVO c) async {
+  Future<void> Updatevalue(CityVOModel c) async {
     selectedCity = c;
     notifyListeners();
   }

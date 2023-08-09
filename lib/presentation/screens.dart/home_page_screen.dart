@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:task_6/models/CurrentUser.dart';
-import 'package:task_6/models/Property.dart';
-import 'package:task_6/presentation/shared%20widgets/propertycard.dart';
+import 'package:task_6/models/CurrentUser_model.dart';
+import 'package:task_6/models/Property_model.dart';
+import 'package:task_6/presentation/shared%20widgets/PropertyCard_Widget.dart';
 import 'package:task_6/provider/CurrentUser_provider.dart';
 import 'package:task_6/provider/Property_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:task_6/presentation/shared widgets/customdrawer.dart';
+import 'package:task_6/presentation/shared%20widgets/CustomDrawer_Widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,9 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Widget build(BuildContext context) {
-    List<Property> properties =
-        Provider.of<Property_provider>(context).Properties;
-    CurrentUser Cuser = Provider.of<CurrentUser_provider>(context).Cuser;
+    List<PropertyModel> properties =
+        Provider.of<PropertyProvider>(context).Properties;
+    CurrentUserModel Cuser = Provider.of<CurrentUserProvider>(context).Cuser;
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Color(0xFFF9F9F9),
@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(40, 0, 8, 0),
-                          child: DropdownButton<Property>(
+                          child: DropdownButton<PropertyModel>(
                             isExpanded: true,
                             hint: Text(
                               'Select a property',
@@ -90,16 +90,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontFamily: 'MontserratRegular',
                                   fontSize: 13),
                             ),
-                            value: Provider.of<Property_provider>(context)
+                            value: Provider.of<PropertyProvider>(context)
                                 .selectedproperty,
-                            onChanged: (Property? newValue) {
-                              Provider.of<Property_provider>(context,
+                            onChanged: (PropertyModel? newValue) {
+                              Provider.of<PropertyProvider>(context,
                                       listen: false)
                                   .Updatevalue(newValue!);
                             },
-                            items: properties.map<DropdownMenuItem<Property>>(
-                                (Property property) {
-                              return DropdownMenuItem<Property>(
+                            items: properties.map<DropdownMenuItem<PropertyModel>>(
+                                (PropertyModel property) {
+                              return DropdownMenuItem<PropertyModel>(
                                 value: property,
                                 child: Text(
                                   property.propertyName,
@@ -142,23 +142,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(40, 0, 8, 0),
-                        child: DropdownButton<Property>(
+                        child: DropdownButton<PropertyModel>(
                           isExpanded: true,
                           hint: Text(
                             'Select Dates',
                             style: TextStyle(
                                 fontFamily: 'MontserratRegular', fontSize: 13),
                           ),
-                          value: Provider.of<Property_provider>(context)
+                          value: Provider.of<PropertyProvider>(context)
                               .selectedproperty,
-                          onChanged: (Property? newValue) {
-                            Provider.of<Property_provider>(context,
+                          onChanged: (PropertyModel? newValue) {
+                            Provider.of<PropertyProvider>(context,
                                     listen: false)
                                 .Updatevalue(newValue!);
                           },
-                          items: properties.map<DropdownMenuItem<Property>>(
-                              (Property property) {
-                            return DropdownMenuItem<Property>(
+                          items: properties.map<DropdownMenuItem<PropertyModel>>(
+                              (PropertyModel property) {
+                            return DropdownMenuItem<PropertyModel>(
                               value: property,
                               child: Text(
                                 property.propertyName,
@@ -196,23 +196,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(40, 0, 8, 0),
-                        child: DropdownButton<Property>(
+                        child: DropdownButton<PropertyModel>(
                           isExpanded: true,
                           hint: Text(
                             'Guests & Rooms',
                             style: TextStyle(
                                 fontFamily: 'MontserratRegular', fontSize: 13),
                           ),
-                          value: Provider.of<Property_provider>(context)
+                          value: Provider.of<PropertyProvider>(context)
                               .selectedproperty,
-                          onChanged: (Property? newValue) {
-                            Provider.of<Property_provider>(context,
+                          onChanged: (PropertyModel? newValue) {
+                            Provider.of<PropertyProvider>(context,
                                     listen: false)
                                 .Updatevalue(newValue!);
                           },
-                          items: properties.map<DropdownMenuItem<Property>>(
-                              (Property property) {
-                            return DropdownMenuItem<Property>(
+                          items: properties.map<DropdownMenuItem<PropertyModel>>(
+                              (PropertyModel property) {
+                            return DropdownMenuItem<PropertyModel>(
                               value: property,
                               child: Text(
                                 property.propertyName,
@@ -251,13 +251,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: Provider.of<Property_provider>(context, listen: false)
-                    .getlength(Provider.of<Property_provider>(context)
+            itemCount: Provider.of<PropertyProvider>(context, listen: false)
+                    .getlength(Provider.of<PropertyProvider>(context)
                         .selectedproperty!) +
                 1,
             itemBuilder: (context, index) {
               return PropertyCard(
-                space: Provider.of<Property_provider>(context)
+                space: Provider.of<PropertyProvider>(context)
                     .selectedproperty!
                     .availableSpaces[index],
               );

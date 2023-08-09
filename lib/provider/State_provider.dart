@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:task_6/models/CState.dart';
-import 'package:task_6/Services.dart/CompleteProfileService.dart';
-import 'package:task_6/models/Country.dart';
+import 'package:task_6/models/CState_model.dart';
+import 'package:task_6/Services.dart/CompleteProfile_Services.dart';
+import 'package:task_6/models/Country_model.dart';
 
-class State_provider extends ChangeNotifier {
-  List<CState> _CStates = [];
-  List<CState> get CStates => _CStates;
-  CState? selectedState;
+class StateProvider extends ChangeNotifier {
+  List<CStateModel> _CStates = [];
+  List<CStateModel> get CStates => _CStates;
+  CStateModel? selectedState;
 
-  CompleteProfileService service = CompleteProfileService();
-  Future<void> fetchStates(Country country) async {
+  CompleteProfileServices service = CompleteProfileServices();
+  Future<void> fetchStates(CountryModel country) async {
     _CStates = await service.getStatesById(country);
     notifyListeners();
   }
 
-  Future<void> Updatevalue(CState c) async {
+  Future<void> Updatevalue(CStateModel c) async {
     selectedState = c;
     notifyListeners();
   }

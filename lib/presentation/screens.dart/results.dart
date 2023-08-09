@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:task_6/models/CState.dart';
-import 'package:task_6/models/Country.dart';
-import 'package:task_6/models/Languages.dart';
-import 'package:task_6/models/cityV0.dart';
+import 'package:task_6/models/CState_model.dart';
+import 'package:task_6/models/Country_model.dart';
+import 'package:task_6/models/Languages_model.dart';
+import 'package:task_6/models/cityV0_model.dart';
 import 'package:task_6/provider/Country_provider.dart';
 import 'package:task_6/provider/Language_provider.dart';
 import 'package:task_6/provider/State_provider.dart';
 import 'package:task_6/provider/cityV0_provider.dart';
 
-class results extends StatelessWidget {
-  const results({Key? key}) : super(key: key);
+class Results extends StatelessWidget {
+  const Results({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Country? scountry = Provider.of<Country_provider>(context).selectedCountry;
-    CState? cState = Provider.of<State_provider>(context).selectedState;
-    Language? sLanguage =
-        Provider.of<Language_Provider>(context).selectedLanguage;
-    CityVO? sCity = Provider.of<CityVO_Provider>(context).selectedCity;
+    CountryModel? scountry = Provider.of<CountryProvider>(context).selectedCountry;
+    CStateModel? cState = Provider.of<StateProvider>(context).selectedState;
+    LanguageModel? sLanguage =
+        Provider.of<LanguageProvider>(context).selectedLanguage;
+    CityVOModel? sCity = Provider.of<CityVOProvider>(context).selectedCity;
 
     return Scaffold(
       appBar: AppBar(

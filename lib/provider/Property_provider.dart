@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:task_6/Services.dart/property_service.dart';
-import 'package:task_6/models/Property.dart';
-import 'package:task_6/models/Space.dart';
+import 'package:task_6/Services.dart/Property_Servics.dart';
+import 'package:task_6/models/Property_model.dart';
+import 'package:task_6/models/Space_model.dart';
 
-class Property_provider extends ChangeNotifier {
-  List<Property> _Properties = [];
-  List<Property> get Properties => _Properties;
-  Property? selectedproperty;
+class PropertyProvider extends ChangeNotifier {
+  List<PropertyModel> _Properties = [];
+  List<PropertyModel> get Properties => _Properties;
+  PropertyModel? selectedproperty;
   bool drawerisopen = false;
-  Future<void> setdot(Space space1,int i) async {
+  Future<void> setdot(SpaceModel space1,int i) async {
     space1.cindex=i;
     notifyListeners();
   }
 
-  propertyservice service = propertyservice();
+  PropertyServices service = PropertyServices();
   Future<void> fetchproperties() async {
     _Properties = await service.getAllAvailableProperties();
     selectedproperty = Properties[0];
     notifyListeners();
   }
 
-  Future<void> Updatevalue(Property p) async {
+  Future<void> Updatevalue(PropertyModel p) async {
     selectedproperty = null;
     selectedproperty = p;
     notifyListeners();
   }
 
-  int getlength(Property p) {
+  int getlength(PropertyModel p) {
     try {
       return p.availableSpaces.length - 1;
     } catch (e) {

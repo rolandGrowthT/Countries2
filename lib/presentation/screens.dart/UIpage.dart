@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:task_6/models/CState.dart';
-import 'package:task_6/models/Country.dart';
-import 'package:task_6/models/Languages.dart';
-import 'package:task_6/models/cityV0.dart';
+import 'package:task_6/models/CState_model.dart';
+import 'package:task_6/models/Country_model.dart';
+import 'package:task_6/models/Languages_model.dart';
+import 'package:task_6/models/cityV0_model.dart';
 import 'package:task_6/provider/Country_provider.dart';
 import 'package:task_6/provider/Language_provider.dart';
 import 'package:task_6/provider/State_provider.dart';
 import 'package:task_6/provider/cityV0_provider.dart';
-import 'package:task_6/presentation/screens.dart/results.dart';
+import 'package:task_6/presentation/screens.dart/Results.dart';
 
 class UIpage extends StatefulWidget {
   const UIpage({super.key});
@@ -21,18 +21,18 @@ class _UIpageState extends State<UIpage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<Country_provider>(context, listen: false).fetchCountries();
-    Provider.of<Language_Provider>(context, listen: false).fetchlanguage();
+    Provider.of<CountryProvider>(context, listen: false).fetchCountries();
+    Provider.of<LanguageProvider>(context, listen: false).fetchlanguage();
   }
 
   bool isLoading = false;
 
   Widget build(BuildContext context) {
-    List<Country> countries = Provider.of<Country_provider>(context).Countries;
-    List<CState> states = Provider.of<State_provider>(context).CStates;
-    List<CityVO> cities = Provider.of<CityVO_Provider>(context).Cities;
-    List<Language> languages =
-        Provider.of<Language_Provider>(context).languages;
+    List<CountryModel> countries = Provider.of<CountryProvider>(context).Countries;
+    List<CStateModel> states = Provider.of<StateProvider>(context).CStates;
+    List<CityVOModel> cities = Provider.of<CityVOProvider>(context).Cities;
+    List<LanguageModel> languages =
+        Provider.of<LanguageProvider>(context).languages;
     return Scaffold(
       appBar: AppBar(
         title: Text('Country'),
@@ -48,27 +48,27 @@ class _UIpageState extends State<UIpage> {
               SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.fromLTRB(70, 20, 70, 20),
-                child: DropdownButton<Country>(
+                child: DropdownButton<CountryModel>(
                   isExpanded: true,
                   hint: Text(
                     'Select your Country',
                     style: TextStyle(
                         fontFamily: 'MontserratRegular', fontSize: 20),
                   ),
-                  value: Provider.of<Country_provider>(context).selectedCountry,
-                  onChanged: (Country? newValue) {
-                    Provider.of<State_provider>(context, listen: false)
+                  value: Provider.of<CountryProvider>(context).selectedCountry,
+                  onChanged: (CountryModel? newValue) {
+                    Provider.of<StateProvider>(context, listen: false)
                         .Clearlist();
-                    Provider.of<CityVO_Provider>(context, listen: false)
+                    Provider.of<CityVOProvider>(context, listen: false)
                         .Clearlist();
-                    Provider.of<State_provider>(context, listen: false)
+                    Provider.of<StateProvider>(context, listen: false)
                         .fetchStates(newValue!);
-                    Provider.of<Country_provider>(context, listen: false)
+                    Provider.of<CountryProvider>(context, listen: false)
                         .Updatevalue(newValue);
                   },
                   items: countries
-                      .map<DropdownMenuItem<Country>>((Country country) {
-                    return DropdownMenuItem<Country>(
+                      .map<DropdownMenuItem<CountryModel>>((CountryModel country) {
+                    return DropdownMenuItem<CountryModel>(
                       value: country,
                       child: Text(
                         country.countryName,
@@ -82,24 +82,24 @@ class _UIpageState extends State<UIpage> {
               SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.fromLTRB(70, 20, 70, 20),
-                child: DropdownButton<CState>(
+                child: DropdownButton<CStateModel>(
                   isExpanded: true,
                   hint: Text(
                     'Select your State',
                     style: TextStyle(
                         fontFamily: 'MontserratRegular', fontSize: 20),
                   ),
-                  value: Provider.of<State_provider>(context).selectedState,
-                  onChanged: (CState? newValue2) {
-                    Provider.of<CityVO_Provider>(context, listen: false)
+                  value: Provider.of<StateProvider>(context).selectedState,
+                  onChanged: (CStateModel? newValue2) {
+                    Provider.of<CityVOProvider>(context, listen: false)
                         .Clearlist();
-                    Provider.of<CityVO_Provider>(context, listen: false)
+                    Provider.of<CityVOProvider>(context, listen: false)
                         .fetchCities(newValue2!);
-                    Provider.of<State_provider>(context, listen: false)
+                    Provider.of<StateProvider>(context, listen: false)
                         .Updatevalue(newValue2);
                   },
-                  items: states.map<DropdownMenuItem<CState>>((CState cstate) {
-                    return DropdownMenuItem<CState>(
+                  items: states.map<DropdownMenuItem<CStateModel>>((CStateModel cstate) {
+                    return DropdownMenuItem<CStateModel>(
                       value: cstate,
                       child: Text(
                         cstate.stateName,
@@ -112,20 +112,20 @@ class _UIpageState extends State<UIpage> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(70, 20, 70, 20),
-                child: DropdownButton<CityVO>(
+                child: DropdownButton<CityVOModel>(
                   isExpanded: true,
                   hint: Text(
                     'Select your City',
                     style: TextStyle(
                         fontFamily: 'MontserratRegular', fontSize: 20),
                   ),
-                  value: Provider.of<CityVO_Provider>(context).selectedCity,
-                  onChanged: (CityVO? newValue3) {
-                    Provider.of<CityVO_Provider>(context, listen: false)
+                  value: Provider.of<CityVOProvider>(context).selectedCity,
+                  onChanged: (CityVOModel? newValue3) {
+                    Provider.of<CityVOProvider>(context, listen: false)
                         .Updatevalue(newValue3!);
                   },
-                  items: cities.map<DropdownMenuItem<CityVO>>((CityVO city) {
-                    return DropdownMenuItem<CityVO>(
+                  items: cities.map<DropdownMenuItem<CityVOModel>>((CityVOModel city) {
+                    return DropdownMenuItem<CityVOModel>(
                       value: city,
                       child: Text(
                         city.cityName,
@@ -138,7 +138,7 @@ class _UIpageState extends State<UIpage> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(70, 20, 70, 20),
-                child: DropdownButton<Language>(
+                child: DropdownButton<LanguageModel>(
                   isExpanded: true,
                   hint: Text(
                     'Select your prefered language',
@@ -146,14 +146,14 @@ class _UIpageState extends State<UIpage> {
                         fontFamily: 'MontserratRegular', fontSize: 15),
                   ),
                   value:
-                      Provider.of<Language_Provider>(context).selectedLanguage,
-                  onChanged: (Language? newValue4) {
-                    Provider.of<Language_Provider>(context, listen: false)
+                      Provider.of<LanguageProvider>(context).selectedLanguage,
+                  onChanged: (LanguageModel? newValue4) {
+                    Provider.of<LanguageProvider>(context, listen: false)
                         .Updatevalue(newValue4!);
                   },
                   items: languages
-                      .map<DropdownMenuItem<Language>>((Language language) {
-                    return DropdownMenuItem<Language>(
+                      .map<DropdownMenuItem<LanguageModel>>((LanguageModel language) {
+                    return DropdownMenuItem<LanguageModel>(
                       value: language,
                       child: Text(
                         language.languageDescription,
@@ -170,7 +170,7 @@ class _UIpageState extends State<UIpage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => results(),
+                      builder: (context) => Results(),
                     ),
                   );
                 },

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:task_6/models/Country.dart';
-import 'package:task_6/Services.dart/CompleteProfileService.dart';
+import 'package:task_6/models/Country_model.dart';
+import 'package:task_6/Services.dart/CompleteProfile_Services.dart';
 
-class Country_provider extends ChangeNotifier {
-  List<Country> _Countries = [];
-  List<Country> get Countries => _Countries;
-  Country? selectedCountry;
-  CompleteProfileService service = CompleteProfileService();
+class CountryProvider extends ChangeNotifier {
+  List<CountryModel> _Countries = [];
+  List<CountryModel> get Countries => _Countries;
+  CountryModel? selectedCountry;
+  CompleteProfileServices service = CompleteProfileServices();
   Future<void> fetchCountries() async {
     _Countries = await service.getAllCountries();
     notifyListeners();
   }
 
-  Future<void> Updatevalue(Country c) async {
+  Future<void> Updatevalue(CountryModel c) async {
     selectedCountry = null;
     selectedCountry = c;
     notifyListeners();
