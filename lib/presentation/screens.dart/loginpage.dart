@@ -175,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                         print('Login button pressed');
                         temp = await currentUserProvider.signIn(
                             context, controller1.text, controller2.text);
-                        CustomSnackbar.show(context, '$temp');
+                        if (temp != '') CustomSnackbar.show(context, '$temp');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xFF297BE6),

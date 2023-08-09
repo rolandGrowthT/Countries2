@@ -246,7 +246,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             controller2.text,
                             controller3.text,
                             controller4.text);
-                        CustomSnackbar.show(context, '$temp');
+                        if (temp != '') CustomSnackbar.show(context, '$temp');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xFF297BE6),
