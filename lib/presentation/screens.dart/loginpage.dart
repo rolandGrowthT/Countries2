@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   final controller1 = TextEditingController();
 
   final controller2 = TextEditingController();
-
+  String temp = '';
 
   bool isobscured = true;
   String imageused = 'assets/icons/Group 11783.svg';
@@ -173,8 +173,9 @@ class _LoginPageState extends State<LoginPage> {
                     child: ElevatedButton(
                       onPressed: () async {
                         print('Login button pressed');
-                        await currentUserProvider.signIn(
+                        temp = await currentUserProvider.signIn(
                             context, controller1.text, controller2.text);
+                        CustomSnackbar.show(context, '$temp');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xFF297BE6),

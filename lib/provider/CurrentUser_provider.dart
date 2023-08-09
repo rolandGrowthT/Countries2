@@ -45,10 +45,10 @@ class CurrentUserProvider extends ChangeNotifier {
     return null;
   }
 
-  Future<void> signIn(
+  Future<String> signIn(
       BuildContext context, String email, String password) async {
     Turnloading();
-
+    String temp = '';
     try {
       await _auth.signInWithEmailAndPassword(
           email: email.trim(), password: password.trim());
@@ -66,20 +66,23 @@ class CurrentUserProvider extends ChangeNotifier {
         CustomSnackbar.show(context, '${e.message}');
       } else {
         if (email.trim() == '' && password.trim() == '') {
-          CustomSnackbar.show(context, 'Please enter an email and password');
+          temp = 'Please enter an email and password';
         } else if (email.trim() != '' && password.trim() == '') {
-          CustomSnackbar.show(context, 'Please enter a password');
+          temp = 'Please enter a password';
         } else {
-          CustomSnackbar.show(context, 'Please enter an email');
+          temp = 'Please enter an email';
         }
       }
     }
+
     Turnloading();
+    return temp;
   }
 
-  Future<void> signUp(BuildContext context, String email, String password,
+  Future<String> signUp(BuildContext context, String email, String password,
       String firstName, String lastName) async {
     Turnloading();
+    String temp='';
     int Except = 0;
 
     if (firstName.trim() == '' && lastName.trim() == '') {
@@ -88,10 +91,10 @@ class CurrentUserProvider extends ChangeNotifier {
           context, 'Please provide a valid first name and last name');
     } else if (firstName.trim() == '' && lastName.trim() != '') {
       Except = 1;
-      CustomSnackbar.show(context, 'Please provide a valid first name ');
+      temp='Please provide a valid first name ';
     } else if (firstName.trim() != '' && lastName.trim() == '') {
       Except = 1;
-      CustomSnackbar.show(context, 'Please provide a valid last name');
+      temp='Please provide a valid last name';
     } else {
       Except = 0;
     }
@@ -114,17 +117,18 @@ class CurrentUserProvider extends ChangeNotifier {
         if (e is FirebaseAuthException &&
             email.trim() != '' &&
             password.trim() != '') {
-          CustomSnackbar.show(context, '${e.message}');
+          temp='${e.message}';
         } else {
           if (email.trim() == '' && password.trim() == '')
-            CustomSnackbar.show(context, 'Please enter an email and password');
+            temp='Please enter an email and password';
           else if (email.trim() != '' && password.trim() == '')
-            CustomSnackbar.show(context, 'Please enter a password');
+            temp='Please enter a password';
           else
-            CustomSnackbar.show(context, 'Please enter an email');
+            temp='Please enter an email';
         }
       }
     }
     Turnloading();
+    return temp;
   }
 }

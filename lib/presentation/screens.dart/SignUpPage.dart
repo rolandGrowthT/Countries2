@@ -23,7 +23,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final controller3 = TextEditingController();
 
   final controller4 = TextEditingController();
-
+  String temp = '';
   int Except = 0;
   bool isobscured = true;
   String imageused = 'assets/icons/Group 11783.svg';
@@ -240,8 +240,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: ElevatedButton(
                       onPressed: () async {
                         print('SignUp button pressed');
-                        await currentUserProvider.signUp(
-      context, controller1.text, controller2.text, controller3.text, controller4.text);
+                        String temp = await currentUserProvider.signUp(
+                            context,
+                            controller1.text,
+                            controller2.text,
+                            controller3.text,
+                            controller4.text);
+                        CustomSnackbar.show(context, '$temp');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Color(0xFF297BE6),
